@@ -1,0 +1,40 @@
+.navbar {
+    width: 100%;
+    background: #358bec;
+    padding: 20px 50px;
+    box-sizing: border-box;
+}
+
+.navbar ul {
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.navbar .logo {
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .logo img {
+    margin-right: 5px;
+    filter: invert(90%);
+    width: 48px;
+}
+
+.navbar .logo a{
+    text-decoration: none;
+    color: var(--bg-color);
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.navbar a {
+    color: var(--bg-color);
+    text-decoration: none;
+    margin-right: 20px;
+}

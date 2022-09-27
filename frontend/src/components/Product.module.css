@@ -1,0 +1,30 @@
+.card {
+    border: 1px solid #888;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    padding:10px;
+    background: white;
+}
+
+.card img {
+    max-width: 100%;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.details a {
+    text-decoration: none;
+    color: #333;
+}
+
+.price {
+    font-weight: bold;
+}
+
+.rating {
+    margin: 0 10px;
+}
