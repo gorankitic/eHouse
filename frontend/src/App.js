@@ -9,6 +9,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
+import ProductDetails from './pages/product/ProductDetails';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='/products/:id' element={<ProductDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

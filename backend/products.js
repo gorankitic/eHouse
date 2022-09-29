@@ -1,6 +1,5 @@
-const products = [
+exports.products = [
     {
-        _id: '1',
         name: 'Airpods Wireless Headphones',
         image: '/images/airpods.jpg',
         description: 'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
@@ -12,7 +11,6 @@ const products = [
         numReviews: 12,
     },
     {
-        _id: '2',
         name: 'iPhone 12 Max Pro',
         image: '/images/iphone12maxpro.jpg',
         description: 'Introducing the iPhone 12 Max Pro. A transformative camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
@@ -24,7 +22,6 @@ const products = [
         numReviews: 8,
     },
     {
-        _id: '3',
         name: 'Sony A7 III Camera',
         image: '/images/sony-a7.jpg',
         description: 'Characterized by versatile imaging specs, the Sony A7 III further clarifies itself using a pair of robust focusing systems and an intuitive design',
@@ -36,7 +33,6 @@ const products = [
         numReviews: 12,
     },
     {
-        _id: '4',
         name: 'Sony Playstation 5',
         image: '/images/playstation.jpg',
         description: 'The ultimate home entertainment center starts with PlayStation. Whether you are into gaming, HD movies, television, music',
@@ -48,7 +44,6 @@ const products = [
         numReviews: 12,
     },
     {
-        _id: '5',
         name: 'Xiaomi Smartwatch',
         image: '/images/xiaomi-smartwatch.jpg',
         description: 'The all-day Always-On Display* feature can display time, even in direct sunlight. Clearly displays incoming calls, notifications, fitness, and other important information.',
@@ -60,7 +55,6 @@ const products = [
         numReviews: 10,
     },
     {
-        _id: '6',
         name: 'HP Laserjet Printer',
         image: '/images/hp-printer.jpg',
         description: 'Perfect for office and home work. HP LaserJets have unmatched printing speed, performance and reliability that you can trust.',
@@ -70,7 +64,5 @@ const products = [
         countInStock: 7,
         rating: 4.5,
         numReviews: 10,
-    },
+    }
 ]
-
-export default products

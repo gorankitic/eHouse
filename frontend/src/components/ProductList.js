@@ -1,4 +1,6 @@
+// styles
 import styles from './ProductList.module.css'
+// components
 import Product from './Product'
 
 const ProductList = ({ products }) => {

@@ -1,4 +1,6 @@
+// styles
 import styles from './Product.module.css'
+// components
 import { Link } from 'react-router-dom'
 import Rating from './Rating'
 
