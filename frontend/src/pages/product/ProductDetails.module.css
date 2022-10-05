@@ -3,6 +3,14 @@
     margin: 30px auto;
 }
 
+.page.dark {
+    color: white;
+}
+
+.page.dark p, .page.dark h2 {
+    color: white;
+}
+
 .page a {
     background: none;
     border: 1px solid var(--primary-color);
@@ -63,4 +71,8 @@
 .select {
     width: 200px;
     height: 35px;
+}
+
+.select.dark {
+    color: #333;
 }

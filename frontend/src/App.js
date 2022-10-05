@@ -11,10 +11,15 @@ import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
 import ProductDetails from './pages/product/ProductDetails';
 
+// hooks
+import { useTheme } from './hooks/useTheme';
+
 
 function App() {
+  const { mode } = useTheme()
+ 
   return (
-    <div>
+    <div className={`App ${mode}`}>
       <BrowserRouter>
         <Navbar />
         <Routes>

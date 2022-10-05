@@ -38,3 +38,12 @@
     text-decoration: none;
     margin-right: 20px;
 }
+
+.navbar .mode {
+    height: 36px;
+    width: 36px;
+    cursor: pointer; 
+    margin-top: 8px;
+    margin-left: 10px;
+    filter: invert(100%);
+}
