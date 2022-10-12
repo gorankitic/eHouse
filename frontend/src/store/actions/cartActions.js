@@ -16,13 +16,14 @@ export const addToCart = (id, qty) => {
             qty
         }));
         
-        // Not great solution, doble check on backend
+        // it's not a great solution, doble check on backend
         localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
     }
 }
 
 export const removeFromCart = (id) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         dispatch(cartActions.removeFromCart(id))
+        localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
     }
 }

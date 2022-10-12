@@ -23,7 +23,7 @@ const Cart = () => {
     <div className={styles.cartpage}>
       <h1>Shopping cart</h1>
       <div className={styles.containers}>
-        <div>
+        <div className={styles.cartItems}>
           {cartItems.length === 0 && <p>Your cart is empty. <Link to='/'>Go back</Link></p>}
           {cartItems.map(item => (
             <div className={styles.cartItem} key={item.id}>
@@ -34,6 +34,7 @@ const Cart = () => {
               <button className='secondary-btn' onClick={() => removeFromCartHandler(item.id)}>Remove</button>
             </div>
           ))}
+          <Link to='/'>Continue shopping</Link>
         </div>
         <div className={styles.total}>
             <p><strong>Total:</strong> {cartItems.reduce((acc, item) => acc + item.qty, 0)} items</p>
