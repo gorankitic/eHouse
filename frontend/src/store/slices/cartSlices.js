@@ -1,10 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const cartSlice = createSlice({
+// Not great solution, doble check on backend
+const itemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
+
+const initialState = {
+    cartItems: itemsFromStorage
+}
+
+const cartSlice = createSlice({
     name: 'cart',
-    initialState: {
-        cartItems: []
-    },
+    initialState,
     reducers: {
         addToCart(state, action) {
             const item = action.payload;
@@ -21,5 +26,5 @@ export const cartSlice = createSlice({
     }
 });
 
+export const cartReducer = cartSlice.reducer;
 export const cartActions = cartSlice.actions;
-

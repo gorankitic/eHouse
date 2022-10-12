@@ -1,7 +1,7 @@
 import { cartActions } from "../slices/cartSlices";
 
 export const addToCart = (id, qty) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         const res = await fetch(`/api/products/${id}`);
         if(!res.ok) {
             throw new Error(res.statusText)
@@ -16,6 +16,8 @@ export const addToCart = (id, qty) => {
             qty
         }));
         
+        // Not great solution, doble check on backend
+        localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
     }
 }
 
