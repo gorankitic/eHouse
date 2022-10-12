@@ -1,9 +1,10 @@
 //styles
 import styles from './Navbar.module.css'
 
-//icon
+//icons
 import House from '../assets/home.svg'
 import Mode from '../assets/mode.svg'
+import Cart from '../assets/cart.svg'
 
 //components
 import { Link } from 'react-router-dom'
@@ -24,6 +25,10 @@ const Navbar = () => {
             <li className={styles.logo}>
                 <img src={House} alt="House icon" />
                 <Link to='/'>eHouse</Link>
+            </li>
+            <li className={styles.cart}>
+              <img src={Cart} alt="Cart icon" />
+              <Link to='/cart'>Cart</Link>
             </li>
             <li><Link to='/login'>Login</Link></li>
             <li><Link to='/signup'>Signup</Link></li>

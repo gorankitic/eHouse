@@ -5,7 +5,6 @@ export const useFetch = (url) => {
     const [isPending, setIsPending] = useState(null)
     const [error, setError] = useState(null)
 
-
     useEffect(() => {
         // abort fetching if component is unmounted
         const controller = new AbortController()
