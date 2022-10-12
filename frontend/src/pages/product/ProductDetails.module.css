@@ -25,7 +25,7 @@
 .page a:hover {
     color: white;
     background-color: var(--primary-color);
-  }
+}
 
 .container {
     margin: 20px 0;

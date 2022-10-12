@@ -11,6 +11,7 @@ import Select from 'react-select';
 import Loader from '../../components/Loader';
 // actions
 import { listProductDetails } from '../../store/actions/productActions';
+import { addToCart } from '../../store/actions/cartActions';
 
 const ProductDetails = () => {
   const { mode } = useTheme();
@@ -21,29 +22,20 @@ const ProductDetails = () => {
   const { loading, error, product } = useSelector(state => state.productDetails);
 
   useEffect(() => {
-    dispatch(listProductDetails(id))
+    dispatch(listProductDetails(id));
   },[dispatch, id]) 
 
   const qOptions = []
   if(product) {
     for(let i=1; i<=product.countInStock; i++) {
-      qOptions.push({value: i, label: i})
+      qOptions.push({value: i, label: i});
     }
   }
   
   const addToCartHandler = (e) => {
-    e.preventDefault()
-    dispatch({
-      type: 'ADD_TO_CART',
-      payload: {
-          id: product._id,
-          name: product.name,
-          image: product.image,
-          price: product.price,
-          qty: option.value
-      }
-    })
-    navigate('/cart')
+    e.preventDefault();
+    dispatch(addToCart(id, option.value))
+    navigate('/cart');
   }
 
   return (
