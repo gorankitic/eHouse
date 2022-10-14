@@ -1,10 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const userFromStorage = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
+
+const initialState = {
+    user: userFromStorage,
+    loading: false,
+    error: null
+};
+
 const signupSlice = createSlice({
     name: 'signup',
-    initialState: {
-        user: {}
-    },
+    initialState: {},
     reducers: {
         signupRequest() {
             return { loading: true };
@@ -19,10 +25,8 @@ const signupSlice = createSlice({
 });
 
 const loginSlice = createSlice({
-    name: 'signup',
-    initialState: {
-        user: {}
-    },
+    name: 'login',
+    initialState,
     reducers: {
         loginRequest() {
             return { loading: true };
@@ -34,7 +38,7 @@ const loginSlice = createSlice({
             return { loading: false, error: action.payload };
         },
         logout() {
-            return {};
+            return { user: null };
         }
     }
 });

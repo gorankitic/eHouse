@@ -1,9 +1,11 @@
 // hooks
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // styles
 import styles from './Signup.module.css';
+// components
+import Loader from '../../components/Loader';
 // actions
 import { signup } from '../../store/actions/userActions';
 
@@ -13,15 +15,17 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading, error, user } = useSelector(state => state.signup);
 
   const handleSignup = async (e) => {
     e.preventDefault();
     dispatch(signup(name, email, password));
-    navigate('/');
   };
 
   return (
     <form className={styles.signup} onSubmit={handleSignup}>
+      {loading && <Loader />}
+      {error && <p className='error'>{error}</p>}
       <h1>Sign up</h1>
       <label>Name:</label>
       <input 

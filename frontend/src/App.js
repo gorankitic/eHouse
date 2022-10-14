@@ -2,7 +2,7 @@
 import './App.css';
 
 // components
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 
 // pages
@@ -15,10 +15,11 @@ import Profile from './pages/profile/Profile';
 
 // hooks
 import { useTheme } from './hooks/useTheme';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
-  const { mode } = useTheme()
+  const { mode } = useTheme();
+  const { user } = useSelector(state => state.login);
  
   return (
     <div className={`App ${mode}`}>
@@ -26,11 +27,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={!user ? <Login /> : <Home />} />
+          <Route path='/signup' element={!user ? <Signup /> : <Home />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/products/:id' element={<ProductDetails />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile' element={user ? <Profile /> : <Login />} />
         </Routes>
       </BrowserRouter>
     </div>

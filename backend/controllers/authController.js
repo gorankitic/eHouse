@@ -19,7 +19,7 @@ const createSendToken = (user, statusCode, res) => {
     });
 };
 
-exports.signup = catchAsync( async(req, res, next) => {
+const signup = catchAsync( async(req, res, next) => {
     const { name, email, password } = req.body;
 
     const existUser = await User.findOne({ email });
@@ -32,7 +32,7 @@ exports.signup = catchAsync( async(req, res, next) => {
     createSendToken(newUser, 201, res);
 });
 
-exports.login = catchAsync( async(req, res, next) => {
+const login = catchAsync( async(req, res, next) => {
     const { email, password } = req.body;
 
     // 1) Check if email and password exists
@@ -49,7 +49,7 @@ exports.login = catchAsync( async(req, res, next) => {
     createSendToken(user, 200, res);
 });
 
-exports.protect = catchAsync( async(req, res, next) => {
+const protect = catchAsync( async(req, res, next) => {
     // 1) Get token
     let token;
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -76,7 +76,7 @@ exports.protect = catchAsync( async(req, res, next) => {
     next();
 });
 
-exports.restrictTo = (...roles) => {
+const restrictTo = (...roles) => {
     return (req, res, next) => {
         if(!roles.includes(req.user.role)) {
             return next(new AppError('You do not have a permission po perform this action.', 403));
@@ -84,3 +84,5 @@ exports.restrictTo = (...roles) => {
         next();
     }
 };
+
+module.exports = { createSendToken, signup, login, protect }
