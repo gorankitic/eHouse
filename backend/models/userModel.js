@@ -3,7 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
-    displayName: {
+    name: {
         type: String,
         required: [true, 'Please provide your name.']
     },
@@ -21,10 +21,9 @@ const userSchema = mongoose.Schema({
         select: false
     },
     passwordChangedAt: Date,
-    role: {
-        type: String,
-        enum: ['admin', 'user'],
-        default: 'user'
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 });
 

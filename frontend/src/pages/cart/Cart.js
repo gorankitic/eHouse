@@ -24,7 +24,7 @@ const Cart = () => {
       <h1>Shopping cart</h1>
       <div className={styles.containers}>
         <div className={styles.cartItems}>
-          {cartItems.length === 0 && <p>Your cart is empty. <Link to='/'>Go back</Link></p>}
+          {cartItems.length === 0 && <p className={styles.empty}>Your cart is empty.</p>}
           {cartItems.map(item => (
             <div className={styles.cartItem} key={item.id}>
               <img src={item.image} alt={item.name} />

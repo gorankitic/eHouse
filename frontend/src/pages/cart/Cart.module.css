@@ -14,8 +14,8 @@
     align-items:flex-start;
 }
 
-.cartItems {
-    margin-bottom: 30px;
+.empty {
+    margin-bottom: 15px;
 }
 
 .cartItem {

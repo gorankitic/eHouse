@@ -11,6 +11,7 @@ import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
 import ProductDetails from './pages/product/ProductDetails';
 import Cart from './pages/cart/Cart';
+import Profile from './pages/profile/Profile';
 
 // hooks
 import { useTheme } from './hooks/useTheme';
@@ -29,6 +30,7 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/products/:id' element={<ProductDetails />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </div>

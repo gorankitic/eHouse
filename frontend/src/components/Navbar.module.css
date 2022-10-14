@@ -1,7 +1,7 @@
 .navbar {
     width: 100%;
     background: #358bec;
-    padding: 20px 50px;
+    padding: 20px 120px;
     box-sizing: border-box;
 }
 
@@ -50,9 +50,25 @@
     filter: invert(90%);
 }
 
+.logedin {
+    display: flex;
+    align-items: center;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.user img {
+    width: 30px;
+    margin-right: 5px;
+    filter: invert(90%);
+}
+
 .navbar .mode {
-    height: 36px;
-    width: 36px;
+    height: 30px;
+    width: 30px;
     cursor: pointer; 
     margin-top: 8px;
     margin-left: 10px;

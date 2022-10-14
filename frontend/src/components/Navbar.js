@@ -1,22 +1,32 @@
-//styles
-import styles from './Navbar.module.css'
-
-//icons
-import House from '../assets/home.svg'
-import Mode from '../assets/mode.svg'
-import Cart from '../assets/cart.svg'
-
-//components
-import { Link } from 'react-router-dom'
-
 // hooks
-import { useTheme } from '../hooks/useTheme'
+import { useTheme } from '../hooks/useTheme';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+//styles
+import styles from './Navbar.module.css';
+//components
+import { Link } from 'react-router-dom';
+//icons
+import House from '../assets/home.svg';
+import Mode from '../assets/mode.svg';
+import Cart from '../assets/cart.svg';
+import User from '../assets/user.svg';
+// actions
+import { logout } from '../store/actions/userActions';
 
 const Navbar = () => {
-  const { changeMode, mode } = useTheme()
+  const { changeMode, mode } = useTheme();
+  const { user } = useSelector(state => state.login);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const toggleMode = () => {
     changeMode(mode === 'dark' ? 'light' : 'dark')
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
   }
 
   return (
@@ -30,15 +40,22 @@ const Navbar = () => {
               <img src={Cart} alt="Cart icon" />
               <Link to='/cart'>Cart</Link>
             </li>
-            <li><Link to='/login'>Login</Link></li>
-            <li><Link to='/signup'>Signup</Link></li>
-            <li><button className='btn'>Logout</button></li>
+            {user && (
+              <div className={styles.logedin}>
+                <li className={styles.user}>
+                  <img src={User} alt='User icon' />
+                  <Link to='/profile'>Profile</Link>
+                </li>
+                <li><button className='btn' onClick={handleLogout}>Logout</button></li>
+              </div>
+            )}
+            {!user && <li><Link to='/login'>Login</Link></li>}
             <li>
               <img className={styles.mode} src={Mode} onClick={toggleMode} alt="Mode icon" />
             </li>
         </ul>
     </nav>
   )
-}
+};
 
-export default Navbar
+export default Navbar;

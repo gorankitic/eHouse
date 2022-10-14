@@ -1,0 +1,17 @@
+.signup {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.signup h1 {
+    font-size: 1.5rem;
+}
+
+.signup button {
+    margin-top: 30px;
+    width: 150px;
+}
