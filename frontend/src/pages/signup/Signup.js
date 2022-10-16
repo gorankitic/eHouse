@@ -1,7 +1,6 @@
 // hooks
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 // styles
 import styles from './Signup.module.css';
 // components
@@ -14,8 +13,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { loading, error, user } = useSelector(state => state.signup);
+  const { loading, error } = useSelector(state => state.signup);
 
   const handleSignup = async (e) => {
     e.preventDefault();

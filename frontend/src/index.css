@@ -93,3 +93,12 @@ input {
   padding: 8px;
   margin: 10px 0;
 }
+
+.success {
+  color: #444;
+  background: rgb(188, 243, 142);;
+  border: 1px solid rgb(79, 167, 28);
+  border-radius: 4px;
+  padding: 8px;
+  margin: 10px 0;
+}

@@ -2,20 +2,21 @@
 import './App.css';
 
 // components
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Navbar from './components/Navbar'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 // pages
-import Home from './pages/home/Home'
-import Login from './pages/login/Login'
-import Signup from './pages/signup/Signup'
+import Home from './pages/home/Home';
+import Login from './pages/login/Login';
+import Signup from './pages/signup/Signup';
 import ProductDetails from './pages/product/ProductDetails';
 import Cart from './pages/cart/Cart';
 import Profile from './pages/profile/Profile';
+import Shipping from './pages/shipping/Shipping';
 
 // hooks
 import { useTheme } from './hooks/useTheme';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function App() {
   const { mode } = useTheme();
@@ -32,6 +33,7 @@ function App() {
           <Route path='/cart' element={<Cart />} />
           <Route path='/products/:id' element={<ProductDetails />} />
           <Route path='/profile' element={user ? <Profile /> : <Login />} />
+          <Route path='/shipping' element={user ? <Shipping /> : <Login />} />
         </Routes>
       </BrowserRouter>
     </div>

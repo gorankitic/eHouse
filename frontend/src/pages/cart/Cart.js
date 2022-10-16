@@ -1,5 +1,6 @@
 // hook
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 // styles
 import styles from './Cart.module.css'
 // components
@@ -10,13 +11,14 @@ import { removeFromCart } from '../../store/actions/cartActions';
 const Cart = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector(state => state.cart);
+  const navigate = useNavigate();
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
   }
 
   const checkoutHandler = () => {
-    console.log('checkout');
+    navigate('/shipping');
   }
 
   return (

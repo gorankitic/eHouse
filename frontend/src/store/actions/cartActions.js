@@ -16,7 +16,7 @@ export const addToCart = (id, qty) => {
             qty
         }));
         
-        // it's not a great solution, doble check on backend
+        // it's not a great solution, double check on backend
         localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
     }
 }

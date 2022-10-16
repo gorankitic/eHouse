@@ -1,0 +1,17 @@
+.shipping {
+    max-width: 1400px;
+    margin: 30px auto;
+}
+
+.shipping h1 {
+    font-size: 1.2rem;
+}
+
+.shipping form {
+    max-width: 400px;
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
