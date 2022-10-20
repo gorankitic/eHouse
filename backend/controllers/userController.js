@@ -17,6 +17,11 @@ exports.getUserProfile = catchAsync( async(req, res, next) => {
     })
 });
 
+exports.getAllUsers = catchAsync(async(req, res, next) => {
+    const users = await User.find({});
+    res.status(200).json(users);
+});
+
 exports.updateUserProfile = catchAsync(async(req, res, next) => {
     const user = await User.findById(req.user._id);
 

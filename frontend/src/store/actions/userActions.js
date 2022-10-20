@@ -1,4 +1,5 @@
 import { signupActions, loginActions, userDetailsActions, updateProfileActions } from '../slices/userSlices';
+import { myOrdersActions } from '../slices/orderSlices';
 
 export const signup = (name, email, password) => {
     return async (dispatch) => {
@@ -50,6 +51,8 @@ export const logout = () => {
     return async (dispatch) => {
         localStorage.removeItem('user');
         dispatch(loginActions.logout());
+        dispatch(userDetailsActions.userDetailsReset());
+        dispatch(myOrdersActions.myOrdersReset());
     }
 };
 

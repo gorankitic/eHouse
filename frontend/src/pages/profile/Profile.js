@@ -21,7 +21,7 @@ const Profile = () => {
   const { loading: loadingOrders, error: errorOrders, orders } = useSelector(state => state.myOrders);
 
   useEffect(() => {
-    if(!user.name || !user) {
+    if(!user || !user.name || success) {
       dispatch(updateProfileActions.updateProfileReset());
       dispatch(getUserDetails('profile'));
       dispatch(listMyOrders());
@@ -29,7 +29,7 @@ const Profile = () => {
       setName(user.name);
       setEmail(user.email);
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, success]);
 
   const handleUpdateUser = (e) => {
     e.preventDefault();

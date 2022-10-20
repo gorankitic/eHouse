@@ -13,7 +13,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const { loading, error, user } = useSelector(state => state.login);
+  const { loading, error } = useSelector(state => state.login);
 
   const handleLogin = async (e) => {
     e.preventDefault();

@@ -1,4 +1,5 @@
 import { createOrderActions, orderDetailsActions, orderPayActions, myOrdersActions } from "../slices/orderSlices";
+import { cartActions } from '../slices/cartSlices';
 
 export const createOrder = (order) => {
     return async (dispatch, getState) => {
@@ -20,6 +21,7 @@ export const createOrder = (order) => {
             dispatch(createOrderActions.createOrderFail(json.message));
         } else if(response.ok) {
             dispatch(createOrderActions.createOrderSuccess(json));
+            dispatch(cartActions.clearCartItems());
         }
     }
 };

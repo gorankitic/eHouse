@@ -1,8 +1,11 @@
 const express = require('express');
-const { signup, login, protect } = require('../controllers/authController');
-const { getUserProfile, updateUserProfile } = require('../controllers/userController');
+const { signup, login, protect, restrictToAdmin } = require('../controllers/authController');
+const { getUserProfile, updateUserProfile, getAllUsers } = require('../controllers/userController');
 
 const router = express.Router();
+
+router.route('/')
+    .get(protect, restrictToAdmin, getAllUsers)
 
 router.post('/signup', signup);
 router.post('/login', login);

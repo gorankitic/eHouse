@@ -14,6 +14,9 @@ const createOrderSlice = createSlice({
         },
         createOrderFail(state, action) {
             return { loading: false, success: false, error: action.payload };
+        },
+        createOrderReset() {
+            return {};
         }
     }
 });
@@ -71,6 +74,9 @@ const myOrdersSlice = createSlice({
         },
         myOrdersFail(state, action) {
             return { ...state, loading: false, error: action.payload };
+        },
+        myOrdersReset(state) {
+            return {};
         }
     }
 });

@@ -8,6 +8,8 @@ import styles from './PlaceOrder.module.css';
 import CheckoutSteps from '../../components/CheckoutSteps';
 // actions
 import { createOrder } from '../../store/actions/orderActions';
+import { createOrderActions } from '../../store/slices/orderSlices';
+import { userDetailsActions } from '../../store/slices/userSlices';
 
 const PlaceOrder = () => {
     const { paymentMethod, shippingAddress, cartItems } = useSelector(state => state.cart);
@@ -22,8 +24,10 @@ const PlaceOrder = () => {
     useEffect(() => {
         if(order && success) {
             navigate(`/order/${order._id}`);
+            dispatch(createOrderActions.createOrderReset());
+            dispatch(userDetailsActions.userDetailsReset());
         }
-    }, [navigate, order, success]);
+    }, [navigate, order, success, dispatch]);
 
     const placeOrderHandler = () => {
         dispatch(createOrder({

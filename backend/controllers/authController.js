@@ -76,13 +76,12 @@ const protect = catchAsync( async(req, res, next) => {
     next();
 });
 
-const restrictTo = (...roles) => {
-    return (req, res, next) => {
-        if(!roles.includes(req.user.role)) {
-            return next(new AppError('You do not have a permission po perform this action.', 403));
-        }
+const restrictToAdmin = catchAsync(async(req, res, next) => {
+    if(req.user && req.user.isAdmin) {
         next();
+    } else {
+        return next(new AppError('You have not permission to do this.', 401));
     }
-};
+});
 
-module.exports = { createSendToken, signup, login, protect }
+module.exports = { createSendToken, signup, login, protect, restrictToAdmin }
