@@ -13,6 +13,9 @@ import ProductDetails from './pages/product/ProductDetails';
 import Cart from './pages/cart/Cart';
 import Profile from './pages/profile/Profile';
 import Shipping from './pages/shipping/Shipping';
+import Payment from './pages/payment/Payment';
+import PlaceOrder from './pages/placeorder/PlaceOrder';
+import Order from './pages/order/Order';
 
 // hooks
 import { useTheme } from './hooks/useTheme';
@@ -34,6 +37,9 @@ function App() {
           <Route path='/products/:id' element={<ProductDetails />} />
           <Route path='/profile' element={user ? <Profile /> : <Login />} />
           <Route path='/shipping' element={user ? <Shipping /> : <Login />} />
+          <Route path='/payment' element={user ? <Payment /> : <Login />} />
+          <Route path='/placeorder' element={user ? <PlaceOrder /> : <Login />} />
+          <Route path='/order/:id' element={user ? <Order /> : <Login />} />
         </Routes>
       </BrowserRouter>
     </div>

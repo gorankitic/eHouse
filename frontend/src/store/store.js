@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { productListReducer, productDetailsReducer } from './slices/productSlices';
 import { cartReducer } from './slices/cartSlices';
 import { signupReducer, loginReducer, userDetailsReducer, updateProfileReducer } from './slices/userSlices';
+import { createOrderReducer, orderDetailsReducer, orderPayReducer, myOrderReducer } from './slices/orderSlices';
 
 
 export const store = configureStore({
@@ -12,6 +13,10 @@ export const store = configureStore({
         signup: signupReducer,
         login: loginReducer,
         userDetails: userDetailsReducer,
-        updateProfile: updateProfileReducer
+        updateProfile: updateProfileReducer,
+        createOrder: createOrderReducer,
+        orderDetails: orderDetailsReducer,
+        orderPay: orderPayReducer,
+        myOrders: myOrderReducer
     }
 });

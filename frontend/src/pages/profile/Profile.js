@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './Profile.module.css';
 // components
 import Loader from '../../components/Loader';
+import { Link } from 'react-router-dom';
 // actions
 import { getUserDetails, updateProfile } from '../../store/actions/userActions';
 import { updateProfileActions } from '../../store/slices/userSlices';
+import { listMyOrders } from '../../store/actions/orderActions';
 
 const Profile = () => {
   const [name, setName] = useState('');
@@ -16,11 +18,13 @@ const Profile = () => {
   const dispatch = useDispatch();
   const { loading, error, user } = useSelector(state => state.userDetails);
   const { success } = useSelector(state => state.updateProfile);
+  const { loading: loadingOrders, error: errorOrders, orders } = useSelector(state => state.myOrders);
 
   useEffect(() => {
     if(!user.name || !user) {
       dispatch(updateProfileActions.updateProfileReset());
       dispatch(getUserDetails('profile'));
+      dispatch(listMyOrders());
     } else {
       setName(user.name);
       setEmail(user.email);
@@ -62,7 +66,17 @@ const Profile = () => {
         </form>
       </div>
       <div className={styles.orders}>
-        <h1>Orders</h1>
+        <h1>My orders</h1>
+        {loadingOrders && <Loader />}
+        {errorOrders && <p className='error'>{errorOrders}</p>}
+        {orders && orders.map(order => (
+          <div key={order._id} className={styles.orderItem}>
+            <p>Price: €{order.totalPrice}</p>
+            <p>Paid: {order.isPaid ? order.paidAt.substring(0, 10) : <i className='fas fa-times' style={{color: 'red'}}></i>}</p>
+            <p>Delivered: {order.isDelivered ? order.deliveredAt.substring(0, 10) : <i className='fas fa-times' style={{color: 'red'}}></i>}</p>      
+            <Link to={`/order/${order._id}`}>Details</Link>       
+          </div>
+        ))}
       </div>
     </div>
   )

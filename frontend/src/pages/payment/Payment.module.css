@@ -1,4 +1,4 @@
-.shipping {
+.payment {
     max-width: 1400px;
     margin: 30px auto;
 }
@@ -13,6 +13,7 @@
 }
 
 .container form {
+    width: 200px;
     margin: 20px 0;
     padding: 20px;
     background: #fff;
@@ -20,7 +21,14 @@
     border-radius: 4px;
 }
 
-.shipping button {
-    margin-top: 25px;
-    width: 180px;
+.radio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+}
+
+.radio input {
+    width: 20px;
+    padding-left: 10px;
 }

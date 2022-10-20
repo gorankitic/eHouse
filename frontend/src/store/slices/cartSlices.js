@@ -2,10 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
         
 // it's not a great solution, double check on backend
 const itemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
+const shippingAddressFromStorage = localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')) : {}
+const paymentMethodFromStorage = localStorage.getItem('paymentMethod') ? JSON.parse(localStorage.getItem('paymentMethod')) : {}
+
 
 const initialState = {
-    cartItems: itemsFromStorage
-}
+    cartItems: itemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+    paymentMethod: paymentMethodFromStorage
+};
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -22,6 +27,12 @@ const cartSlice = createSlice({
         },
         removeFromCart(state, action) {
             return { ...state, cartItems: state.cartItems.filter(item => item.id !== action.payload) }
+        },
+        saveShippingAddress(state, action) {
+            return { ...state, shippingAddress: action.payload };
+        },
+        savePaymentMethod(state, action) {
+            return { ...state, paymentMethod: action.payload };
         }
     }
 });

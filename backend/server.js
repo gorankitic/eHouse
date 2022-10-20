@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const connectDatabase = require('./database');
 const productRouter = require('./routes/productRouter');
 const userRouter = require('./routes/userRouter');
+const orderRouter = require('./routes/orderRouter');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -15,6 +16,9 @@ connectDatabase();
 // Routes
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
+app.use('/api/orders', orderRouter);
+
+app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID));
 
 // Handling unhandled routes
 app.all('*', (req, res, next) => {
