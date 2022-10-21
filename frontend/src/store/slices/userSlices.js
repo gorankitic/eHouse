@@ -83,6 +83,61 @@ const updateProfileSlice = createSlice({
     }
 });
 
+const listUsersSlice = createSlice({
+    name: 'listUsers',
+    initialState: {
+        users: []
+    },
+    reducers: {
+        listUsersRequest(state) {
+            return { loading: true };
+        },
+        listUsersSuccess(state, action) {
+            return { loading: false, users: action.payload };
+        },
+        listUsersFail(state, action) {
+            return { loading: false, error: action.payload };
+        }
+    }
+});
+
+const deleteUserSlice = createSlice({
+    name: 'deleteUser',
+    initialState: {},
+    reducers: {
+        deleteUserRequest(state) {
+            return { loading: true };
+        },
+        deleteUserSuccess(state) {
+            return { loading: false, success: true };
+        },
+        deleteUserFail(state, action) {
+            return { loading: false, error: action.payload };
+        }
+    }
+});
+
+const updateUserSlice = createSlice({
+    name: 'updateUser',
+    initialState: {
+        user: {}
+    },
+    reducers: {
+        updateUserRequest(state) {
+            return { loading: true };
+        },
+        updateUserSuccess(state) {
+            return { loading: false, success: true };
+        },
+        updateUserFail(state, action) {
+            return { loading: false, error: action.payload };
+        },
+        updateUserReset(state) {
+            return { user: {} };
+        }
+    }
+});
+
 export const signupActions = signupSlice.actions;
 export const signupReducer = signupSlice.reducer;
 
@@ -94,3 +149,12 @@ export const userDetailsReducer = userDetailsSlice.reducer;
 
 export const updateProfileActions = updateProfileSlice.actions;
 export const updateProfileReducer = updateProfileSlice.reducer;
+
+export const listUsersActions = listUsersSlice.actions;
+export const listUsersReducer = listUsersSlice.reducer;
+
+export const deleteUserActions = deleteUserSlice.actions;
+export const deleteUserReducer = deleteUserSlice.reducer;
+
+export const updateUserActions = updateUserSlice.actions;
+export const updateUserReducer = updateUserSlice.reducer;

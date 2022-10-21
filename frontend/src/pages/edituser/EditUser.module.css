@@ -1,0 +1,40 @@
+.edituser {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.container {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 20px;
+    padding: 30px;
+}
+
+.edituser h1 {
+    font-size: 1.1rem;
+}
+
+.edituser a {
+    background: none;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    padding: 4px 10px;
+    color: var(--primary-color);
+    cursor: pointer; 
+    text-decoration: none;
+    font-size: 1em;
+    width: 100px;
+    text-align: center;
+}
+
+.edituser a:hover {
+    color: white;
+    background-color: var(--primary-color);
+}
+
+.container button {
+    margin-top: 20px;
+    width: 150px;
+}

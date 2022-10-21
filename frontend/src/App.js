@@ -16,6 +16,10 @@ import Shipping from './pages/shipping/Shipping';
 import Payment from './pages/payment/Payment';
 import PlaceOrder from './pages/placeorder/PlaceOrder';
 import Order from './pages/order/Order';
+import UsersList from './pages/userslist/UsersList';
+import ProductsList from './pages/productslist/ProductsList';
+import OrdersList from './pages/orderslist/OrdersList';
+import EditUser from './pages/edituser/EditUser';
 
 // hooks
 import { useTheme } from './hooks/useTheme';
@@ -40,6 +44,10 @@ function App() {
           <Route path='/payment' element={user ? <Payment /> : <Login />} />
           <Route path='/placeorder' element={user ? <PlaceOrder /> : <Login />} />
           <Route path='/order/:id' element={user ? <Order /> : <Login />} />
+          <Route path='/admin/users' element={user && user.isAdmin ? <UsersList /> : <Home />} />
+          <Route path='/admin/products' element={user && user.isAdmin ? <ProductsList /> : <Home />} />
+          <Route path='/admin/orders' element={user && user.isAdmin ? <OrdersList /> : <Home />} />
+          <Route path='/admin/users/:id' element={user && user.isAdmin ? <EditUser /> : <Home />} />
         </Routes>
       </BrowserRouter>
     </div>

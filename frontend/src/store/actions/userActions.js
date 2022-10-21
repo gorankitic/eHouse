@@ -1,4 +1,4 @@
-import { signupActions, loginActions, userDetailsActions, updateProfileActions } from '../slices/userSlices';
+import { signupActions, loginActions, userDetailsActions, updateProfileActions, listUsersActions, updateUserActions, deleteUserActions } from '../slices/userSlices';
 import { myOrdersActions } from '../slices/orderSlices';
 
 export const signup = (name, email, password) => {
@@ -100,6 +100,75 @@ export const updateProfile = (userObj) => {
             dispatch(updateProfileActions.updateProfileSuccess(json));
             dispatch(loginActions.loginSuccess(json));
             localStorage.setItem('user', JSON.stringify(json));
+        }
+    }
+};
+
+export const listUsers = () => {
+    return async (dispatch, getState) => {
+        dispatch(listUsersActions.listUsersRequest());
+
+        const { login: { user } } = getState();
+
+        const response = await fetch(`/api/users`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            },
+        })
+        const json = await response.json();
+        
+        if(!response.ok) {
+            dispatch(listUsersActions.listUsersFail(json.message));
+        } else if(response.ok) {
+            dispatch(listUsersActions.listUsersSuccess(json));
+        }
+    }
+};
+
+export const deleteUser = (id) => {
+    return async (dispatch, getState) => {
+        dispatch(deleteUserActions.deleteUserRequest());
+
+        const { login: { user } } = getState();
+
+        const response = await fetch(`/api/users/${id}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            },
+        })
+        const json = await response.json();
+        
+        if(!response.ok) {
+            dispatch(deleteUserActions.deleteUserFail(json.message));
+        } else if(response.ok) {
+            dispatch(deleteUserActions.deleteUserSuccess());
+        }
+    }
+};
+
+export const updateUser = (userObject) => {
+    return async (dispatch, getState) => {
+        dispatch(updateUserActions.updateUserRequest());
+
+        const { login: { user } } = getState();
+
+        const response = await fetch(`/api/users/${userObject._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${user.token}`
+            },
+            body: JSON.stringify(userObject)
+        })
+        const json = await response.json();
+
+        if(!response.ok) {
+            dispatch(updateUserActions.updateUserFail(json.message));
+        } else if(response.ok) {
+            dispatch(updateUserActions.updateUserSuccess());
+            dispatch(userDetailsActions.userDetailsSuccess(json));
         }
     }
 };

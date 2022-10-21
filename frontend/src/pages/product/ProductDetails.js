@@ -31,7 +31,7 @@ const ProductDetails = () => {
       qOptions.push({value: i, label: i});
     }
   }
-  
+
   const addToCartHandler = (e) => {
     e.preventDefault();
     dispatch(addToCart(id, option.value))

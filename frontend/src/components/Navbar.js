@@ -36,6 +36,13 @@ const Navbar = () => {
                 <img src={House} alt="House icon" />
                 <Link to='/'>eHouse</Link>
             </li>
+            {user && user.isAdmin && (
+              <div className={styles.admin}>
+                <li><Link to='/admin/users'>Users</Link></li>
+                <li><Link to='/admin/products'>Products</Link></li>
+                <li><Link to='/admin/orders'>Orders</Link></li>
+              </div>
+            )}
             <li className={styles.cart}>
               <img src={Cart} alt="Cart icon" />
               <Link to='/cart'>Cart</Link>

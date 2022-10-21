@@ -40,3 +40,48 @@ exports.updateUserProfile = catchAsync(async(req, res, next) => {
     const updatedUser = await user.save();
     createSendToken(updatedUser, 200, res);
 });
+
+exports.deleteUser = catchAsync(async(req, res, next) => {
+    const user = await User.findById(req.params.id);
+
+    if(!user) {
+        return next(new AppError('There is no user with that id.', 404));
+    }
+
+    await user.remove();
+    res.status(200).json({ message: 'User removed.' });
+});
+
+exports.getUser = catchAsync(async(req, res, next) => {
+    const user = await User.findById(req.params.id).select('-password');
+
+    if(!user) {
+        return next(new AppError('There is no user with that id.', 404));
+    }
+
+    res.status(200).json(user);
+});
+
+exports.updateUser = catchAsync(async(req, res, next) => {
+    const user = await User.findById(req.params.id);
+
+    if(user) {
+        if(req.body.name) {
+            user.name = req.body.name || user.name;
+        }
+        if(req.body.email) {
+            user.email = req.body.email || user.email;
+        }
+        if(req.body.isAdmin !== null) {
+            user.isAdmin = req.body.isAdmin;
+        }
+    }
+
+    const updatedUser = await user.save();
+    res.status(200).json({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        isAdmin: updatedUser.isAdmin
+    });
+});
