@@ -9,16 +9,18 @@ import styles from './Order.module.css';
 import Loader from '../../components/Loader';
 import { PayPalButton } from 'react-paypal-button-v2';
 // actions
-import { getOrderDetails, payOrder } from '../../store/actions/orderActions';
-import { orderPayActions } from '../../store/slices/orderSlices';
+import { getOrderDetails, payOrder, deliverOrder } from '../../store/actions/orderActions';
+import { orderDeliverActions, orderPayActions } from '../../store/slices/orderSlices';
 
 
 const Order = () => {
     const [sdkReady, setSdkReady] = useState(false);
     const { id } = useParams();
+    const dispatch = useDispatch();
     const { loading, error, order } = useSelector(state => state.orderDetails);
     const { loading: loadingPay, success: successPay } = useSelector(state => state.orderPay);
-    const dispatch = useDispatch();
+    const { loading: loadingDeliver, success: successDeliver } = useSelector(state => state.orderDeliver);
+    const { user } = useSelector(state => state.login);
 
     useEffect(() => {
         const addPayPalScript = async () => {
@@ -33,8 +35,9 @@ const Order = () => {
             document.body.appendChild(script);
         }
 
-        if(!order || successPay) {
+        if(!order || successPay || successDeliver) {
             dispatch(orderPayActions.orderPayReset());
+            dispatch(orderDeliverActions.orderDeliverReset());
             dispatch(getOrderDetails(id));
         } else if(!order.isPaid) {
             if(!window.paypal) {
@@ -44,7 +47,11 @@ const Order = () => {
             }
         }
        
-    }, [dispatch, id, order, successPay]);
+    }, [dispatch, id, order, successPay, successDeliver]);
+
+    const deliverHandler = () => {
+        dispatch(deliverOrder(order));
+    };
 
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult)
@@ -99,6 +106,10 @@ const Order = () => {
                                     <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler} />
                                 )}
                             </div>
+                        )}
+                        {loadingDeliver ? <Loader /> :
+                        user && user.isAdmin && order.isPaid && !order.isDelivered && (
+                            <button className='secondary-btn' onClick={deliverHandler}>Mark As Delivered</button>
                         )}
                     </div>
                 </div>

@@ -1,10 +1,11 @@
 const express = require('express');
-const { protect } = require('../controllers/authController');
-const { createOrder, getOrder, updateOrderToPaid, getMyOrders } = require('../controllers/orderController');
+const { protect, restrictToAdmin } = require('../controllers/authController');
+const { createOrder, getOrder, updateOrderToPaid, updateOrderToDelivered, getMyOrders, getAllOrders } = require('../controllers/orderController');
 
 const router = express.Router();
 
 router.route('/')
+    .get(protect, restrictToAdmin, getAllOrders)
     .post(protect, createOrder);
 
 router.route('/myorders')
@@ -15,5 +16,8 @@ router.route('/:id')
 
 router.route('/:id/pay')
     .put(protect, updateOrderToPaid);
+
+router.route('/:id/deliver')
+    .put(protect, restrictToAdmin, updateOrderToDelivered)
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config({path: '../.env'});
 const chalk = require('chalk');
+const morgan = require('morgan');
 const connectDatabase = require('./database');
 const productRouter = require('./routes/productRouter');
 const userRouter = require('./routes/userRouter');
@@ -10,6 +11,10 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
 app.use(express.json());
+
+if(process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
 
 connectDatabase();
 

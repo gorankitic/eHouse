@@ -1,0 +1,51 @@
+.productlist {
+    max-width: 1400px;
+    width: 1400px;
+    margin: 30px auto;
+    margin-bottom: 40px;
+}
+
+.productlist h1 {
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
+
+.headContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container {
+    width: 1400px;
+    margin-bottom: 10px;
+}
+
+.container a {
+    width: 150px;
+    background: none;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    padding: 4px 10px;
+    color: var(--primary-color);
+    cursor: pointer; 
+    text-decoration: none;
+    font-size: 1em;
+    text-align: center;
+}
+
+.container a:hover {
+    color: white;
+    background-color: var(--primary-color);
+}
+
+.container button {
+    width: 150px;
+}
+
+th, td {
+    text-align: center;
+    color: #333;
+    padding: 8px;
+    width: 500px;
+}

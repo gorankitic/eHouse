@@ -1,4 +1,4 @@
-import { createOrderActions, orderDetailsActions, orderPayActions, myOrdersActions } from "../slices/orderSlices";
+import { createOrderActions, orderDetailsActions, orderPayActions, orderDeliverActions, myOrdersActions, listOrdersActions } from "../slices/orderSlices";
 import { cartActions } from '../slices/cartSlices';
 
 export const createOrder = (order) => {
@@ -70,6 +70,29 @@ export const payOrder = (id, paymentResult) => {
     }
 };
 
+export const deliverOrder = (order) => {
+    return async (dispatch, getState) => {
+        dispatch(orderDeliverActions.orderDeliverRequest());
+
+        const { login: { user } } = getState();
+
+        const response = await fetch(`/api/orders/${order._id}/deliver`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${user.token}`
+            },
+            body: JSON.stringify({})
+        })
+        const json = await response.json();
+        if(!response.ok) {
+            dispatch(orderDeliverActions.orderDeliverFail(json.message));
+        } else if(response.ok) {
+            dispatch(orderDeliverActions.orderDeliverSuccess(json));
+        }
+    }
+};
+
 export const listMyOrders = () => {
     return async (dispatch, getState) => {
         dispatch(myOrdersActions.myOrdersRequest());
@@ -88,6 +111,26 @@ export const listMyOrders = () => {
             dispatch(myOrdersActions.myOrdersFail(json.message));
         } else if(response.ok) {
             dispatch(myOrdersActions.myOrdersSuccess(json));
+        }
+    }
+};
+
+export const listOrders = () => {
+    return async (dispatch, getState) => {
+        dispatch(listOrdersActions.listOrdersRequest());
+
+        const { login: { user } } = getState();
+
+        const response = await fetch(`/api/orders`, {
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            },
+        })
+        const json = await response.json();
+        if(!response.ok) {
+            dispatch(listOrdersActions.listOrdersFail(json.message));
+        } else if(response.ok) {
+            dispatch(listOrdersActions.listOrdersSuccess(json));
         }
     }
 };

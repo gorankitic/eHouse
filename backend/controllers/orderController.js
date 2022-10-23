@@ -60,9 +60,29 @@ const updateOrderToPaid = catchAsync(async(req, res, next) => {
     res.status(200).json(updatedOrder);
 });
 
+const updateOrderToDelivered = catchAsync(async(req, res, next) => {
+    const order = await Order.findById(req.params.id);
+
+    if(!order) {
+        return next(new AppError('No order with that id.', 404));
+    }
+
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+
+    const updatedOrder = await order.save();
+
+    res.status(200).json(updatedOrder);
+});
+
 const getMyOrders = catchAsync(async(req, res, next) => {
     const orders = await Order.find({ user: req.user._id });
     res.status(200).json(orders);
 });
 
-module.exports = { createOrder, getOrder, updateOrderToPaid, getMyOrders };
+const getAllOrders = catchAsync(async(req, res, next) => {
+    const orders = await Order.find().populate({ path: 'user', select: '-__v -_id -isAdmin' });
+    res.status(200).json(orders);
+});
+
+module.exports = { createOrder, getOrder, updateOrderToPaid, updateOrderToDelivered, getMyOrders, getAllOrders };

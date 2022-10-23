@@ -31,12 +31,6 @@ ul {
   list-style-type: none;
 }
 
-.page-title {
-  font-size: 1em;
-  color: var(--heading-color);
-  display: inline-block;
-}
-
 .btn {
   background: var(--primary-color);
   padding: 8px 12px;

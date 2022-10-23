@@ -8,13 +8,15 @@ import ProductList from '../../components/ProductList';
 import Loader from '../../components/Loader';
 // actions
 import { listProducts } from '../../store/actions/productActions';
+import { orderDetailsActions } from '../../store/slices/orderSlices';
 
 const Home = () => {
   const dispatch = useDispatch();
   const { loading, error, products } = useSelector(state => state.productList);
 
   useEffect(() => {
-    dispatch(listProducts())
+    dispatch(listProducts());
+    dispatch(orderDetailsActions.orderDetailsReset());
   },[dispatch]);
 
   return (

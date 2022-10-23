@@ -17,9 +17,10 @@ import Payment from './pages/payment/Payment';
 import PlaceOrder from './pages/placeorder/PlaceOrder';
 import Order from './pages/order/Order';
 import UsersList from './pages/userslist/UsersList';
-import ProductsList from './pages/productslist/ProductsList';
-import OrdersList from './pages/orderslist/OrdersList';
 import EditUser from './pages/edituser/EditUser';
+import ProductsList from './pages/productslist/ProductsList';
+import ProductEdit from './pages/productedit/ProductEdit';
+import OrdersList from './pages/orderslist/OrdersList';
 
 // hooks
 import { useTheme } from './hooks/useTheme';
@@ -45,9 +46,10 @@ function App() {
           <Route path='/placeorder' element={user ? <PlaceOrder /> : <Login />} />
           <Route path='/order/:id' element={user ? <Order /> : <Login />} />
           <Route path='/admin/users' element={user && user.isAdmin ? <UsersList /> : <Home />} />
-          <Route path='/admin/products' element={user && user.isAdmin ? <ProductsList /> : <Home />} />
-          <Route path='/admin/orders' element={user && user.isAdmin ? <OrdersList /> : <Home />} />
           <Route path='/admin/users/:id' element={user && user.isAdmin ? <EditUser /> : <Home />} />
+          <Route path='/admin/products' element={user && user.isAdmin ? <ProductsList /> : <Home />} />
+          <Route path='/admin/products/:id' element={user && user.isAdmin ? <ProductEdit /> : <Home />} />
+          <Route path='/admin/orders' element={user && user.isAdmin ? <OrdersList /> : <Home />} />
         </Routes>
       </BrowserRouter>
     </div>
