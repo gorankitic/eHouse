@@ -1,4 +1,4 @@
-import { productListActions, productDetailsActions, productCreateActions, productUpdateActions, productDeleteActions } from '../slices/productSlices';
+import { productListActions, productDetailsActions, productCreateActions, productUpdateActions, productDeleteActions, reviewCreateActions } from '../slices/productSlices';
 
 export const listProducts = () => {
     return async (dispatch) => {
@@ -101,6 +101,30 @@ export const deleteProduct = (id) => {
             dispatch(productDeleteActions.productDeleteFail(json.message));
         } else if(response.ok) {
             dispatch(productDeleteActions.productDeleteSuccess());
+        }
+    }
+};
+
+export const createReview = (id, review) => {
+    return async (dispatch, getState) => {
+        dispatch(reviewCreateActions.reviewCreateRequest());
+
+        const { login: { user } } = getState();
+
+        const response = await fetch(`/api/products/${id}/reviews`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${user.token}`
+            },
+            body: JSON.stringify(review)
+        });
+        const json = await response.json();
+
+        if(!response.ok) {
+            dispatch(reviewCreateActions.reviewCreateFail(json.message));
+        } else if(response.ok) {
+            dispatch(reviewCreateActions.reviewCreateSuccess());
         }
     }
 };

@@ -21,7 +21,9 @@ const productListSlice = createSlice({
 const productDetailsSlice = createSlice({
     name: 'productDetails',
     initialState: {
-        product: {}
+        product: {
+            reviews: []
+        }
     },
     reducers: {
         productDetailsRequest(state) {
@@ -34,7 +36,7 @@ const productDetailsSlice = createSlice({
             return { loading: false, error: action.payload };
         },
         productDetailsReset(state) {
-            return { product: {} };
+            return { product: { reviews: []} };
         }
     }
 });
@@ -95,6 +97,25 @@ const productUpdateSlice = createSlice({
     }
 });
 
+const reviewCreateSlice = createSlice({
+    name: 'reviewCreate',
+    initialState: {},
+    reducers: {
+        reviewCreateRequest(state) {
+            return { loading: true, };
+        },
+        reviewCreateSuccess(state, action) {
+            return { loading: false, success: true };
+        },
+        reviewCreateFail(state, action) {
+            return { loading: false, error: action.payload };
+        },
+        reviewCreateReset() {
+            return {};
+        }
+    }
+});
+
 export const productListActions = productListSlice.actions;
 export const productListReducer = productListSlice.reducer;
 
@@ -109,3 +130,6 @@ export const productCreateReducer = productCreateSlice.reducer;
 
 export const productUpdateActions = productUpdateSlice.actions;
 export const productUpdateReducer = productUpdateSlice.reducer;
+
+export const reviewCreateActions = reviewCreateSlice.actions;
+export const reviewCreateReducer = reviewCreateSlice.reducer;

@@ -10,32 +10,55 @@ import Rating from '../../components/Rating';
 import Select from 'react-select';
 import Loader from '../../components/Loader';
 // actions
-import { listProductDetails } from '../../store/actions/productActions';
+import { listProductDetails, createReview } from '../../store/actions/productActions';
+import { reviewCreateActions } from '../../store/slices/productSlices';
 import { addToCart } from '../../store/actions/cartActions';
 
 const ProductDetails = () => {
-  const { mode } = useTheme();
-  const [ option, setOption ] = useState(null);
   const { id } = useParams();
+  const { mode } = useTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [ option, setOption ] = useState(null);
+  const [ rating, setRating ] = useState(0);
+  const [ comment, setComment ] = useState('');
   const { loading, error, product } = useSelector(state => state.productDetails);
+  const { user } = useSelector(state => state.login);
+  const { error: errorReview, success: successReview } = useSelector(state => state.reviewCreate);
 
   useEffect(() => {
+    if(successReview) {
+      dispatch(reviewCreateActions.reviewCreateReset());
+      setRating(0);
+      setComment('');
+    }
     dispatch(listProductDetails(id));
-  },[dispatch, id]) 
+  },[dispatch, id, successReview]) 
 
-  const qOptions = []
+  const qOptions = [];
   if(product) {
     for(let i=1; i<=product.countInStock; i++) {
       qOptions.push({value: i, label: i});
     }
   }
 
+  const ratingOptions = [
+    {value: 1, label: '1 star - poor'}, 
+    {value: 2, label: '2 stars - fair'}, 
+    {value: 3, label: '3 stars - good'}, 
+    {value: 4, label: '4 stars - very good'}, 
+    {value: 5, label: '5 stars - excellent'}
+  ];
+
   const addToCartHandler = (e) => {
     e.preventDefault();
     dispatch(addToCart(id, option.value))
     navigate('/cart');
+  }
+
+  const addReviewHandler = (e) => {
+    e.preventDefault();
+    dispatch(createReview(id, { rating, comment }))
   }
 
   return (
@@ -64,6 +87,40 @@ const ProductDetails = () => {
                   onChange={(option) => setOption(option)}
                 />
                 <button className='secondary-btn' disabled={product.countInStock === 0 || !option} onClick={addToCartHandler}>Add To Cart</button>
+            </div>
+          </div>
+          <div className={styles.reviews}>
+            <div className={styles.reviewlist}>
+              <h1>Reviews</h1>
+              {product && product.reviews.length === 0 && <p className='info'>No reviews</p>}
+              {product.reviews.map(review => (
+                <div key={review._id} className={styles.review}>
+                  <strong>{review.name}</strong>
+                  <Rating value={review.rating} color='#358bec' />
+                  <p>{review.comment}</p>
+                </div>
+              ))}
+            </div>
+            <div className={styles.reviewwrite}>
+              <h1>Write a Customer Review</h1>
+              {errorReview && <p className='error'>{errorReview}</p>}
+              {!user && <p>Please <Link to='/login'>sign in</Link> to write a review.</p>}
+              {user && (
+                <form onSubmit={addReviewHandler}>
+                  <label>Rating:</label>
+                  <Select 
+                    options={ratingOptions}
+                    className={`${styles.select} ${mode === 'dark' ? styles.dark : ''}`}
+                    onChange={(option) => setRating(option.value)}
+                  />
+                  <label>Review:</label>
+                  <textarea 
+                    onChange={(e) => setComment(e.target.value)}
+                    value={comment}
+                  />
+                  <button className='secondary-btn'>Submit</button>
+                </form>
+              )}
             </div>
           </div>
         </>

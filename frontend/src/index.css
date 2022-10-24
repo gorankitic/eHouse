@@ -65,10 +65,20 @@ ul {
 
 label {
   display: block;
-  margin: 15px auto;
+  margin: 10px auto;
 }
 
 input {
+  padding: 8px 6px;
+  font-size: 1em;
+  color: #777;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+textarea {
   padding: 8px 6px;
   font-size: 1em;
   color: #777;
@@ -91,6 +101,15 @@ input {
   color: #444;
   background: rgb(188, 243, 142);;
   border: 1px solid rgb(79, 167, 28);
+  border-radius: 4px;
+  padding: 8px;
+  margin: 10px 0;
+}
+
+.info {
+  color: rgb(11, 52, 128);;
+  background: var(--primary-color);
+  border: 1px solid rgb(11, 52, 128);
   border-radius: 4px;
   padding: 8px;
   margin: 10px 0;

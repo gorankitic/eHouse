@@ -76,3 +76,43 @@
 .select.dark {
     color: #333;
 }
+
+.reviews {
+    display: flex;
+    justify-content: flex-start;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.reviews h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.reviews strong {
+    color: #333;
+}
+
+.reviewlist {
+    width: 300px;
+}
+
+.reviewwrite {
+    width: 400px;
+}
+
+.reviewwrite p {
+    color: #333;
+}
+
+.reviewwrite button {
+    margin-top: 20px;
+}
+
+.reviewwrite .select {
+    width: 400px;
+}
+
+.review {
+    margin-bottom: 15px;
+}

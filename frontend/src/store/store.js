@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { productListReducer, productDetailsReducer, productDeleteReducer, productCreateReducer, productUpdateReducer } from './slices/productSlices';
+import { productListReducer, productDetailsReducer, productDeleteReducer, productCreateReducer, productUpdateReducer, reviewCreateReducer } from './slices/productSlices';
 import { cartReducer } from './slices/cartSlices';
 import { signupReducer, loginReducer, userDetailsReducer, updateProfileReducer, listUsersReducer, deleteUserReducer, updateUserReducer } from './slices/userSlices';
 import { createOrderReducer, orderDetailsReducer, orderPayReducer, orderDeliverReducer, myOrderReducer, listOrdersReducer } from './slices/orderSlices';
@@ -12,6 +12,7 @@ export const store = configureStore({
         productDelete: productDeleteReducer,
         productCreate: productCreateReducer,
         productUpdate: productUpdateReducer,
+        reviewCreate: reviewCreateReducer,
         cart: cartReducer,
         signup: signupReducer,
         login: loginReducer,
