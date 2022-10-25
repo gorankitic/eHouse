@@ -1,6 +1,9 @@
 .signup {
     max-width: 400px;
     margin: 40px auto;
+}
+
+.signup form {
     padding: 20px;
     background: #fff;
     border: 1px solid #ddd;
@@ -9,6 +12,7 @@
 
 .signup h1 {
     font-size: 1.5rem;
+    margin-bottom: 20px;
 }
 
 .signup button {

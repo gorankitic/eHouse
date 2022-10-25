@@ -10,3 +10,7 @@
 .App.dark h1 {
     color: white;
 }
+
+.App.dark th, .App.dark td, .App.dark td p{
+    color: white;
+}

@@ -1,6 +1,7 @@
 // hook
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../../hooks/useTheme';
 // styles
 import styles from './Cart.module.css'
 // components
@@ -9,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { removeFromCart } from '../../store/actions/cartActions';
 
 const Cart = () => {
+  const { mode } = useTheme();
   const dispatch = useDispatch();
   const { cartItems } = useSelector(state => state.cart);
   const navigate = useNavigate();
@@ -22,11 +24,11 @@ const Cart = () => {
   }
 
   return (
-    <div className={styles.cartpage}>
+    <div className={`${styles.cartpage} ${mode === 'dark' ? styles.dark : ''}`}>
       <h1>Shopping cart</h1>
       <div className={styles.containers}>
         <div className={styles.cartItems}>
-          {cartItems.length === 0 && <p className={styles.empty}>Your cart is empty.</p>}
+          {cartItems.length === 0 && <p className={`${styles.empty} ${mode === 'dark' ? styles.dark : ''}`}>Your cart is empty.</p>}
           {cartItems.map(item => (
             <div className={styles.cartItem} key={item.id}>
               <img src={item.image} alt={item.name} />
@@ -37,7 +39,7 @@ const Cart = () => {
             </div>
           ))}
           <Link to='/'>Continue shopping</Link>
-        </div>
+        </div>       
         <div className={styles.total}>
             <p><strong>Total:</strong> {cartItems.reduce((acc, item) => acc + item.qty, 0)} items</p>
             <p><strong>Total price:</strong> €{cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}</p>

@@ -7,7 +7,7 @@
     color: white;
 }
 
-.page.dark p, .page.dark h2 {
+.page.dark p, .page.dark h2, .page.dark strong{
     color: white;
 }
 

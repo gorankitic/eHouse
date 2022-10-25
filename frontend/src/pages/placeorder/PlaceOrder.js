@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../../hooks/useTheme';
 // styles
 import styles from './PlaceOrder.module.css';
 // components
@@ -16,6 +17,7 @@ const PlaceOrder = () => {
     const { order, success, error } = useSelector(state => state.createOrder);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { mode } = useTheme();
 
     // samo za prikaz korisniku, na bekendu sve proveriti
     const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2);
@@ -41,7 +43,7 @@ const PlaceOrder = () => {
         <div className={styles.placeorder}>
             <CheckoutSteps step1 step2 step3 step4 />
             <div className={styles.container}>
-                <div className={styles.details}>
+                <div className={`${styles.details} ${mode === 'dark' ? styles.dark : ''}`}>
                     <h2>Shipping: </h2>
                     <p>
                         <strong>Address: </strong>
@@ -55,7 +57,7 @@ const PlaceOrder = () => {
                     <h2>Ordered items: </h2>
                     {cartItems === 0 ? <p>Your cart is empty</p> : (
                         cartItems.map((item, index) => (
-                            <div key={index} className={styles.cartItem}>
+                            <div key={index} className={`${styles.cartItem} ${mode === 'dark' ? styles.dark : ''}`}>
                                 <img src={item.image} alt={item.name} />
                                 <p>{item.name}</p>
                                 <p><strong>{item.qty} x €{item.price} = €{item.qty * item.price}</strong></p>

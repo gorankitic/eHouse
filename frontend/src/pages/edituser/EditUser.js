@@ -49,8 +49,8 @@ const EditUser = () => {
     return (
         <div className={styles.edituser}>   
             <Link to='/admin/users'>Go Back</Link>
+            <h1>Edit user</h1>
             <div className={styles.container}>
-                <h1>Edit user</h1>
                 <form onSubmit={handleEditUser}>
                     {loadingUpdate && <Loader />}
                     {errorUpdate && <p className='error'>{errorUpdate}</p>}

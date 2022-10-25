@@ -38,9 +38,9 @@ const Profile = () => {
 
   return (
     <div className={styles.profile}>
-      <div className={styles.userDetails}>
+      <div>
         <h1>User profile</h1>
-        <form className={styles.signup} onSubmit={handleUpdateUser}>
+        <form className={styles.userDetails} onSubmit={handleUpdateUser}>
           {loading && <Loader />}
           {success && <p className='success'>Profile updated</p>}
           {error && <p className='error'>{error}</p>}
@@ -65,18 +65,46 @@ const Profile = () => {
           <button className='secondary-btn'>Update</button>
         </form>
       </div>
-      <div className={styles.orders}>
+      <div className={styles.container}>
         <h1>My orders</h1>
         {loadingOrders && <Loader />}
         {errorOrders && <p className='error'>{errorOrders}</p>}
-        {orders && orders.map(order => (
-          <div key={order._id} className={styles.orderItem}>
-            <p>Price: €{order.totalPrice}</p>
-            <p>Paid: {order.isPaid ? order.paidAt.substring(0, 10) : <i className='fas fa-times' style={{color: 'red'}}></i>}</p>
-            <p>Delivered: {order.isDelivered ? order.deliveredAt.substring(0, 10) : <i className='fas fa-times' style={{color: 'red'}}></i>}</p>      
-            <Link to={`/order/${order._id}`}>Details</Link>       
-          </div>
-        ))}
+        <table>
+          <thead>
+          <tr>
+              <th>Price</th>
+              <th>Paid</th>
+              <th>Delivered</th>
+          </tr>
+          </thead>
+          <tbody >
+              {orders && orders.map(order => (
+                  <tr key={order._id} className={styles.item}>
+                      <td>€{order.totalPrice}</td>
+                      <td>{
+                          order.isPaid ? 
+                              (<div className={styles.check}>
+                                  <p>{order.paidAt.substring(0,10)}</p>
+                                  <i className='fas fa-check' style={{color: 'green'}}></i>
+                              </div>) : 
+                              <i className='fas fa-times' style={{color: 'red'}}></i>
+                          }
+                      </td>
+                      <td>{
+                          order.isDelivered ? 
+                              (<div className={styles.check}>
+                                  <p>{order.deliveredAt.substring(0,10)}</p>
+                                  <i className='fas fa-check' style={{color: 'green'}}></i>
+                              </div>) : 
+                              <i className='fas fa-times' style={{color: 'red'}}></i>
+                          }
+                      </td>
+                      <td><Link to={`/order/${order._id}`}>Details</Link></td>
+                  </tr>
+              ))}
+          </tbody>
+      </table>
+
       </div>
     </div>
   )

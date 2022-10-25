@@ -25,18 +25,16 @@
     width: 150px;
 }
 
-.orders {
-    width: 1000px;
+.container {
+    width: 1100px;
+    margin-bottom: 10px;
 }
 
-.orderItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.container tr {
     margin-bottom: 20px;
 }
 
-.orderItem a {
+.container a {
     background: none;
     border: 1px solid var(--primary-color);
     border-radius: 4px;
@@ -45,9 +43,18 @@
     cursor: pointer; 
     text-decoration: none;
     font-size: 1em;
+    width: 150px;
+    text-align: center;
 }
 
-.orderItem a:hover {
+.container a:hover {
     color: white;
     background-color: var(--primary-color);
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }

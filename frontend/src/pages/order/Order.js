@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTheme } from '../../hooks/useTheme';
 // styles
 import styles from './Order.module.css';
 // components
@@ -17,6 +18,7 @@ const Order = () => {
     const [sdkReady, setSdkReady] = useState(false);
     const { id } = useParams();
     const dispatch = useDispatch();
+    const { mode } = useTheme();
     const { loading, error, order } = useSelector(state => state.orderDetails);
     const { loading: loadingPay, success: successPay } = useSelector(state => state.orderPay);
     const { loading: loadingDeliver, success: successDeliver } = useSelector(state => state.orderDeliver);
@@ -64,7 +66,7 @@ const Order = () => {
             {error && <p className='error'>{error}</p>}
             {order && 
                 <div className={styles.container}>
-                    <div className={styles.details}>
+                    <div className={`${styles.details} ${mode === 'dark' ? styles.dark : ''}`}>
                         <h1>Order: </h1>
                         <h2>User: </h2>
                         <p>
@@ -86,7 +88,7 @@ const Order = () => {
                         <h2>Ordered items: </h2>
                         {order.orderItems === 0 ? <p>Your cart is empty</p> : (
                             order.orderItems.map((item, index) => (
-                                <div key={index} className={styles.cartItem}>
+                                <div key={index} className={`${styles.cartItem} ${mode === 'dark' ? styles.dark : ''}`}>
                                     <img src={item.image} alt={item.name} />
                                     <p>{item.name}</p>
                                     <p><strong>{item.qty} x €{item.price} = €{item.qty * item.price}</strong></p>

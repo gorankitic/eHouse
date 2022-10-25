@@ -9,9 +9,17 @@
     color: #333;
 }
 
+.steps.dark a {
+    color: white;
+}
+
 .steps img {
     width: 20px;
     padding-left: 10px;
+}
+
+.steps.dark img {
+    filter: invert(100%);
 }
 
 .item {

@@ -21,30 +21,32 @@ const Signup = () => {
   };
 
   return (
-    <form className={styles.signup} onSubmit={handleSignup}>
-      {loading && <Loader />}
-      {error && <p className='error'>{error}</p>}
+    <div className={styles.signup}>
       <h1>Sign up</h1>
-      <label>Name:</label>
-      <input 
-        type='text'
-        onChange={(e) => setName(e.target.value)}
-        value={name}
-      />
-      <label>Email:</label>
-      <input 
-        type='email' 
-        onChange={(e) => setEmail(e.target.value)}
-        value={email} 
-      />
-      <label>Password:</label>
-      <input 
-        type='password' 
-        onChange={(e) => setPassword(e.target.value)}
-        value={password} 
-      />
-      <button className='secondary-btn'>Sign up</button>
-    </form>
+      <form onSubmit={handleSignup}>
+        {loading && <Loader />}
+        {error && <p className='error'>{error}</p>}
+        <label>Name:</label>
+        <input 
+          type='text'
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+        />
+        <label>Email:</label>
+        <input 
+          type='email' 
+          onChange={(e) => setEmail(e.target.value)}
+          value={email} 
+        />
+        <label>Password:</label>
+        <input 
+          type='password' 
+          onChange={(e) => setPassword(e.target.value)}
+          value={password} 
+        />
+        <button className='secondary-btn'>Sign up</button>
+      </form>
+    </div>
   )
 };
 

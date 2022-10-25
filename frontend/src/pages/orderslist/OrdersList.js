@@ -39,7 +39,7 @@ const OrdersList = () => {
                         <tr key={order._id} className={styles.container}>
                             <td>{order._id}</td>
                             <td>{order.user && order.user.name}</td>
-                            <td>{order.totalPrice}</td>
+                            <td>€{order.totalPrice}</td>
 
                             <td>{
                                 order.isPaid ? 

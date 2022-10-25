@@ -21,25 +21,27 @@ const Login = () => {
   };
 
   return (
-    <form className={styles.login} onSubmit={handleLogin}>
-      {loading && <Loader />}
-      {error && <p className='error'>{error}</p>}
+    <div className={styles.login}>
       <h1>Login</h1>
-      <label>Email:</label>
-      <input 
-        type='email'
-        onChange={(e) => setEmail(e.target.value)}
-        value={email} 
-      />
-      <label>Password:</label>
-      <input 
-        type='password' 
-        onChange={(e) => setPassword(e.target.value)}
-        value={password} 
-      />
-      <button className='secondary-btn' disabled={loading}>Login</button>
-      <p>New customer? <Link to='/signup'>Sign up</Link></p>
-    </form>
+      <form  onSubmit={handleLogin}>
+        {loading && <Loader />}
+        {error && <p className='error'>{error}</p>}
+        <label>Email:</label>
+        <input 
+          type='email'
+          onChange={(e) => setEmail(e.target.value)}
+          value={email} 
+        />
+        <label>Password:</label>
+        <input 
+          type='password' 
+          onChange={(e) => setPassword(e.target.value)}
+          value={password} 
+        />
+        <button className='secondary-btn' disabled={loading}>Login</button>
+        <p>New customer? <Link to='/signup'>Sign up</Link></p>
+      </form>
+    </div>
   )
 };
 

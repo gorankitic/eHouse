@@ -53,8 +53,8 @@ const ProductEdit = () => {
     return (
         <div className={styles.editproduct}>   
             <Link to='/admin/products'>Go Back</Link>
+            <h1>Edit product</h1>
             <div className={styles.container}>
-                <h1>Edit product</h1>
                 {loadingUpdate && <Loader />}
                 {errorUpdate && <p className='error'>{errorUpdate}</p>}
                 <form onSubmit={handleEditProduct}>

@@ -22,6 +22,10 @@
     margin-bottom: 10px;
 }
 
+.details.dark h2, .details.dark p {
+    color: white;
+}
+
 .cartItem {
     display: flex;
     justify-content: space-between;
@@ -37,6 +41,10 @@
 
 .cartItem img {
     width: 100px;
+}
+
+.cartItem.dark p {
+    color: #333;
 }
 
 .summary {
